@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="./css/style.css" />
+<script src="./js/counter.js"></script>
+<script>
+window.onload=function(){
+    
+	// Target date 
+	var dueDate = new Date("Sep 05, 2018").getTime();
+	 
+	// variables for time units
+	var days, hours, minutes, seconds;
+	var miliseconds=1000;
+	var hourperDay=24;
+	var secondsPerHour=3600;
+	var totalSeconds= hourperDay*secondsPerHour;
+	var minutesPerHour=60;
+	
+	 
+	// get tag element
+	var counter =  document.getElementById("counterDown");
+	var daysLabel = document.createElement("SPAN");
+	daysLabel.className = 'days';
+	counter.appendChild(daysLabel);
+	var hoursLabel = document.createElement("SPAN");
+	hoursLabel.className = 'hours';
+	counter.appendChild(hoursLabel);
+	var minutesLabel = document.createElement("SPAN");
+	minutesLabel.className = 'minutes';
+	counter.appendChild(minutesLabel);
+	var secondsLabel = document.createElement("SPAN");
+	secondsLabel.className = 'seconds';
+	counter.appendChild(secondsLabel);
+	 
+	// update the tag with id "countdown" every 1 second
+	setInterval(function () {
+	 
+	    // find the amount of "segundos" between now and target
+	    var currenDate = new Date().getTime();
+	    var seconds_left = (dueDate - currenDate) / miliseconds;
+	    
+	    // do some time calculations
+	    days = parseInt(seconds_left / totalSeconds);
+	    seconds_left = seconds_left % totalSeconds;
+	     
+	    hours = parseInt(seconds_left / secondsPerHour);
+	    seconds_left = seconds_left % secondsPerHour;
+	     
+	    minutes = parseInt(seconds_left / minutesPerHour);
+	    seconds = parseInt(seconds_left % minutesPerHour);
+	     
+	    // format countdown string + set tag value.
+	  
+	    daysLabel.innerHTML = '<span>' + days + '</span>' + 'days';
+	    hoursLabel.innerHTML = '<span>' + hours + '</span>' + 'hours';
+	    minutesLabel.innerHTML = '<span>' + minutes + '</span>' + 'minutes';
+	    secondsLabel.innerHTML = '<span>' + seconds + '</span>' + 'seconds';
+	    
+	  
+	 
+	}, 1000);
+
+	    }
+</script>
+<meta charset="ISO-8859-1">
+<title>Countdown exercise</title>
+</head>
+<body>
+<b><span id="counterDown"></span></b>
+</body>
+</html>

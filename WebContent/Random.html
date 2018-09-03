@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Random Number</title>
+ <link rel="stylesheet" href="./css/style.css" />
+ <script src="./js/jquery.min.js"></script>
+  <script src="./js/customRandom.js"></script>
+<script type="text/javascript">
+
+/**
+ * function which returns a bolean value when compares  the random number versus the 05 val
+ */
+function flip(){
+	return Math.random()>=0.5;
+}
+
+/***
+ * principal function to return the number calculated
+ */
+function randomize(max){
+	setArray();
+	max=document.getElementById("numero").value;
+	var randomN=0;
+	var random1 =  document.getElementById("random");
+	var numberLabel = document.createElement("SPAN");
+	try { 
+		   if(validateNumber(max)){
+			   clearSpan();
+			   max=parseInt(max);
+				if (max===0){
+					
+					randomN=0;
+					
+				}else if (max>1000000){
+					throw "Error:Number bigger than expected (1000000)";
+				}
+				else if(flip()){
+					 randomN= getRandomNumber(max);
+				      
+				}
+				numero.value='';
+				numberLabel.className = 'number';
+				random1.appendChild(numberLabel);
+				numberLabel.innerHTML = '<span>'+'Captured Number='+max+' -->  Result: ' + randomN + '</span>';	
+		   }
+		} catch(err) {
+			
+			numero.value='';
+			randomN=err;
+			
+			numberLabel.className = 'number';
+			random1.appendChild(numberLabel);
+			numberLabel.innerHTML = '<span>'+'Captured Number='+max+' -->  Result: ' + randomN + '</span>';	
+    }
+		
+
+}
+
+
+</script>
+</head>
+<body>
+
+Introduce a Number: <input class="text" type="text" name="numero" id="numero" maxlength="7">
+<button onclick="randomize();">Calculate</button>
+<hr width="1">
+<span id="random"></span>
+</body>
+</html>
